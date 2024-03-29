@@ -59,11 +59,13 @@ func CheckAffectedVendor(json *string) []ValidationError {
 		vendor := value.String()
 		if vendor == "n/a" {
 			invalidVendorFound = true
+			return false // stop iterating
 		}
+		return true
 	})
 
 	if !invalidVendorFound {
-		return
+		return nil
 	}
 
 	errors = append(errors, ValidationError{
