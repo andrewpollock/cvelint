@@ -48,4 +48,10 @@ var RuleSet = map[string]Rule{
 		Description: "One affected/unknown product is present in CNA container",
 		CheckFunc:   rules.CheckAffectedProduct,
 	},
+	"E008": {
+		Code:        "E008",
+		Name:        "check-vendor-is-valid",
+		Description: "One invalid vendor is present in CNA container",
+		CheckFunc:   rules.CheckAffectedVendor,
+	},
 }

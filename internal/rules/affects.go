@@ -45,3 +45,31 @@ func CheckAffectedProduct(json *string) []ValidationError {
 	}
 	return errors
 }
+
+func CheckAffectedVendor(json *string) []ValidationError {
+	if gjson.Get(*json, `cveMetadata.state`).String() != "PUBLISHED" {
+		// REJECTED records do not list affected products
+		return nil
+	}
+	var errors []ValidationError
+	invalidVendorFound := false
+
+	data := gjson.Get(*json, `containers.cna.affected.#.vendor`)
+	data.ForEach(func(key, value gjson.Result) bool {
+		vendor := value.String()
+		if vendor == "n/a" {
+			invalidVendorFound = true
+		}
+	})
+
+	if !invalidVendorFound {
+		return
+	}
+
+	errors = append(errors, ValidationError{
+		Text: "Invalid vendor value found",
+		JsonPath: "containers.cna.affectedA",
+	})
+
+	return errors
+}
