@@ -105,6 +105,8 @@ func CheckInvalidVersion(json *string) []ValidationError {
 	return errors
 }
 
+// CheckInvalidVersion returns an array of detected vendor-related ValidationError findings.
+// It checks that the affected.vendor field contains a non-placeholder value.
 func CheckAffectedVendor(json *string) []ValidationError {
 	if gjson.Get(*json, `cveMetadata.state`).String() != "PUBLISHED" {
 		// REJECTED records do not list affected products
