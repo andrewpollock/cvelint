@@ -34,7 +34,7 @@ func CheckLength(json *string) []ValidationError {
 	})
 	if enDescCount > 1 {
 		errors = append(errors, ValidationError{
-			Text:     fmt.Sprintf("More than one en-US description present"),
+			Text:     "More than one en-US description present",
 			JsonPath: data.Path(*json),
 		})
 	}

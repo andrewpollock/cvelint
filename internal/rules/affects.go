@@ -2,9 +2,10 @@ package rules
 
 import (
 	"fmt"
-	"github.com/tidwall/gjson"
 	"regexp"
 	"strings"
+
+	"github.com/tidwall/gjson"
 )
 
 func CheckAffectedProduct(json *string) []ValidationError {
@@ -127,8 +128,8 @@ func CheckAffectedVendor(json *string) []ValidationError {
 	}
 
 	errors = append(errors, ValidationError{
-		Text: "Invalid vendor value found",
-		JsonPath: "containers.cna.affectedA",
+		Text:     "Invalid vendor value found",
+		JsonPath: "containers.cna.affected",
 	})
 
 	return errors
